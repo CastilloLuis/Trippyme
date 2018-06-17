@@ -1,0 +1,50 @@
+page-home {
+
+}
+
+#home-content {
+    background-image: url('../../assets/homebg.png');
+    background-repeat: no-repeat;
+}
+
+#logo-div {
+    color: white;
+    margin-top: 50%;
+}
+
+#logo-div h1 {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+#trippyme-logo {
+    font-size: 60px;
+    position: absolute;
+    left: 44%;
+    top: 27%;
+}
+
+.memes-logo > p {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 25px;
+    opacity: 0.9;
+    background-color: red;
+    width: 40%;
+    position: absolute;
+    left: 50%;
+    top: 37%;
+    transform: rotate(-10deg);
+}
+
+.home-buttons-wrapper {
+    margin-top: 30%;
+}
+
+.home-buttons {
+    padding: 20px 30px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    width: 100%
+}
