@@ -27,6 +27,9 @@ export class RegisterPage {
       content: 'Loading...',
       duration: 2000
     });
+    this.users['likes'] = [];
+    this.users['generatedMemes'] = [];
+    console.log(this.users)
     this.userSto.users.push(this.users); // save w the provider
     loader.present();
     console.log(this.userSto.users);

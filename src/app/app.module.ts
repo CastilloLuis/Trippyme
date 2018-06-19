@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,7 +14,7 @@ import { LikesPage } from '../pages/likes/likes';
 import { SeelaterPage } from '../pages/seelater/seelater';
 import { ProvidersUsersStorageUsersProvider } from '../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
-
+import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http-providers-http';
 @NgModule({
   declarations: [
     MyApp,
@@ -26,7 +27,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +45,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProvidersUsersStorageUsersProvider,
-    NativeStorage
+    NativeStorage,
+    HttpProvidersHttpProvider,
+    HttpClientModule
   ]
 })
 export class AppModule {}

@@ -32,6 +32,7 @@ export class LoginPage {
     console.log(this.user_login);
     console.log(this.userSto.users);
     let userData;
+    this.navCtrl.setRoot(DashboardPage);
     (this.userSto.users).map((u) => {
       if((u.username === this.user_login['username'])&&(u.password === this.user_login['password'])) {
         this.user_exists = true;
@@ -39,14 +40,14 @@ export class LoginPage {
       }
     });
     if(this.user_exists) {
-      this.nativeSto.setItem('loggeduser', userData)
+      /*this.nativeSto.setItem('loggeduser', userData)
         .then(() => {
           alert('perfect bitch')
           this.navCtrl.setRoot(DashboardPage);
         })
         .catch((err) => {
           alert('error al guardar' + err.message);
-        })
+        })*/
     } else {
       alert('no estas registrado bro');
     }
