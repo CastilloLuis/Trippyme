@@ -1,0 +1,53 @@
+<ion-content padding>
+  <ion-buttons left style="position: absolute; top: 2%;">
+    <button ion-button clear (click)="closeit()">
+      <ion-icon name="close" style="font-size: 25px;"></ion-icon>
+    </button>
+  </ion-buttons>
+
+  <ion-slides>
+
+    <ion-slide>
+      <div style="margin-top: 10%;">
+        <ion-title text-center>GENERATE YOUR MEME</ion-title>
+        <ion-card style="height: auto;">
+          <ion-card-header>
+            {{selectedMeme?.name}}
+          </ion-card-header>
+          <img src="{{selectedMeme?.url}}">
+        </ion-card>
+
+        <ion-title>Fill the filds</ion-title>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Text #1</ion-label>
+            <ion-input type="text" [(ngModel)]="text0"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Text #2</ion-label>
+            <ion-input type="text" [(ngModel)]="text1"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button ion-button full (click)="generateMeme(selectedMeme?.id)">GENERATE IT!</button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <h1 *ngIf="!generated">NO HAZ GENERADO NADA AUN WEY</h1>
+      <div [ngStyle]="setSlide()">
+        <img [src]="generated ? responseMeme : false">
+        <ion-fab right edge>
+            <button ion-fab color="light"><ion-icon name="share"></ion-icon></button>
+            <ion-fab-list side="left">
+              <button ion-fab><ion-icon name="logo-facebook" style="color: rgb(34, 34, 255);"></ion-icon></button>
+              <button ion-fab><ion-icon name="logo-twitter"  style="color: rgb(60, 182, 253);"></ion-icon></button>
+              <button ion-fab><ion-icon name="logo-whatsapp" style="color: rgb(43, 204, 43);"></ion-icon></button>
+            </ion-fab-list>
+          </ion-fab>        
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

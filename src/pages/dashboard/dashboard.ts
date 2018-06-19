@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
-
-/**
- * Generated class for the DashboardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { GenerateMemePage } from '../generate-meme/generate-meme';
 
 @IonicPage()
 @Component({
@@ -17,8 +11,11 @@ import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/h
 export class DashboardPage {
 
   // getting img id
-  memegeneratorurl: string = 'http://version1.api.memegenerator.net//Instance_Create?languageCode=en&generatorID=45&imageID=20&text0=push a hipster down the stairs&text1=now look whos tumbling&apiKey=demo';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProviders: HttpProvidersHttpProvider) {
+  memegeneratorurl: string = 'https://api.imgflip.com/caption_image?template_id=112126428&username=lcastillo&password=26709417&text0=holaa&text1=quetal';
+  memes = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProviders: HttpProvidersHttpProvider,
+              private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -27,9 +24,18 @@ export class DashboardPage {
 
 
   getMemes() {
-    this.httpProviders.fetch(null, 'GET', 'http://version1.api.memegenerator.net//Generators_Select_ByTrending')
+    this.httpProviders.fetch(null, 'GET', 'https://api.imgflip.com/get_memes')
       .subscribe((res) => {
-        console.log(res)
-      })
+        //console.log(res)
+        this.memes = res.data.memes;
+        //console.log(this.memes)
+      });
   }
+
+  generateMeme(data: any) {
+   // console.log(data)
+    let mymodal = this.modalCtrl.create(GenerateMemePage, {data: data});
+    mymodal.present();
+  }
+
 }
