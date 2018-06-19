@@ -11,6 +11,8 @@ import { RegisterPage } from '../pages/register/register';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { LikesPage } from '../pages/likes/likes';
 import { SeelaterPage } from '../pages/seelater/seelater';
+import { ProvidersUsersStorageUsersProvider } from '../providers/providers-users-storage-users/providers-users-storage-users';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { SeelaterPage } from '../pages/seelater/seelater';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ProvidersUsersStorageUsersProvider,
+    NativeStorage
   ]
 })
 export class AppModule {}

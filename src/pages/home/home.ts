@@ -9,15 +9,14 @@ import { RegisterPage } from '../register/register';
 })
 export class HomePage {
 
-  loginPage: LoginPage;
-  registerPage: RegisterPage;
-
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
   }
 
-  goTo(page: any) {
-    let mymodal = this.modalCtrl.create(page);
+  goTo(page) {
+    console.log(page)
+    let p = ((page === 'LoginPage' ? LoginPage : RegisterPage));
+    let mymodal = this.modalCtrl.create(p);
     mymodal.present();
   }
 
