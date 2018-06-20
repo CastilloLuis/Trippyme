@@ -10,9 +10,8 @@ import { GenerateMemePage } from '../generate-meme/generate-meme';
 })
 export class DashboardPage {
 
-  // getting img id
-  memegeneratorurl: string = 'https://api.imgflip.com/caption_image?template_id=112126428&username=lcastillo&password=26709417&text0=holaa&text1=quetal';
   memes = [];
+  memes_arr = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProviders: HttpProvidersHttpProvider,
               private modalCtrl: ModalController) {
@@ -27,8 +26,11 @@ export class DashboardPage {
     this.httpProviders.fetch(null, 'GET', 'https://api.imgflip.com/get_memes')
       .subscribe((res) => {
         //console.log(res)
-        this.memes = res.data.memes;
-        //console.log(this.memes)
+        this.memes_arr = res.data.memes;        
+        for (let i = 0; i < 10; i++) {
+          this.memes.push(this.memes_arr[this.memes.length]);
+        }
+        console.log(this.memes)
       });
   }
 
@@ -36,6 +38,15 @@ export class DashboardPage {
    // console.log(data)
     let mymodal = this.modalCtrl.create(GenerateMemePage, {data: data});
     mymodal.present();
+  }
+
+  infiniteScroll(event) {
+    setTimeout( ()=> {
+      for (let i = 0; i < 10; i++) {
+        this.memes.push(this.memes_arr[this.memes.length]);
+      }    
+      event.complete();
+    }, 2000);
   }
 
 }
