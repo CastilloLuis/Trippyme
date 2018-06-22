@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
 import { GenerateMemePage } from '../generate-meme/generate-meme';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 
 @IonicPage()
 @Component({
@@ -13,20 +14,24 @@ export class DashboardPage {
 
   memes = [];
   memes_arr = [];
+  logged_user = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProviders: HttpProvidersHttpProvider,
-              private modalCtrl: ModalController, private nativeSto: NativeStorage) {
+              private modalCtrl: ModalController, private nativeSto: NativeStorage, private userSto: ProvidersUsersStorageUsersProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
     this.nativeSto.getItem('loggeduser')
     .then(
-      (data) => alert(data),
+      (data) => { 
+        alert(data.username)
+        this.logged_user = data.username;
+        this.getMemes();
+      },
       (err) => alert(err)
-    )
+    );
   }
-
 
   getMemes() {
     this.httpProviders.fetch(null, 'GET', 'https://api.imgflip.com/get_memes')
@@ -44,6 +49,39 @@ export class DashboardPage {
    // console.log(data)
     let mymodal = this.modalCtrl.create(GenerateMemePage, {data: data});
     mymodal.present();
+  }
+
+  addToFavorites(memeData: any) {
+    if(this.alreadyFavorited(memeData.id)) {
+      // the users has alerady favorited this meme
+      alert('Ya haz agregado a favorites este meme');
+    } else {
+      // favorite the selected meme
+      this.userSto.users.map((u) => {
+        if(u.username === this.logged_user) {
+          u.favorites.push(memeData);
+        }
+      });
+    }
+  }
+
+  getFavorites() {
+    this.userSto.users.map((u) => {
+      if(u.username === this.logged_user) {
+        alert(JSON.stringify(u));
+      }
+    });
+  }
+
+  alreadyFavorited(memeID: any) {
+    let favorited;
+    this.userSto.users.map((u) => {
+      if(u.username === this.logged_user) {
+        // este es el user q frao
+        favorited = u.favorites.map((fav) => ((fav.id === memeID) ? true : false));
+      }
+    })
+    return favorited;
   }
 
   infiniteScroll(event) {

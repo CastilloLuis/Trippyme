@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
+import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 /**
  * Generated class for the GenerateMemePage page.
@@ -21,15 +23,25 @@ export class GenerateMemePage {
   selectedMeme: Object;
   responseMeme: string;
   generated = false;
-
+  logged_user = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-              private httpProvider: HttpProvidersHttpProvider, private loaderCtrl: LoadingController) {
+              private httpProvider: HttpProvidersHttpProvider, private loaderCtrl: LoadingController, 
+              private userSto: ProvidersUsersStorageUsersProvider, private nativeSto: NativeStorage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GenerateMemePage');
     this.selectedMeme=(this.navParams.get('data'));
     console.log(this.selectedMeme)
+
+    this.nativeSto.getItem('loggeduser')
+    .then(
+      (data) => { 
+        alert(data.username)
+        this.logged_user = data.username;
+      },
+      (err) => alert(err)
+    );    
   }
 
   generateMeme(memeID: any) {
@@ -43,6 +55,11 @@ export class GenerateMemePage {
         loader.dismiss();     
         this.generated = true;   
         this.responseMeme = res.data.url;
+        this.userSto.users.map((u) => {
+          if(u.username === this.logged_user) {
+            u.favorites.push(this.responseMeme);
+          }
+        });
         console.log(JSON.stringify(res))
       })
   }

@@ -8,6 +8,7 @@ import { helpers } from '../../global';
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
+  providers: [helpers]
 
 })
 export class RegisterPage {
@@ -31,13 +32,13 @@ export class RegisterPage {
     });
     const success = this.toastCtrl.create({
       message: 'Succesfull register!!',
-      duration: 1500,
+      duration: 3000,
       cssClass: 'addedToast'
     });
-    if(this.helpers.validateJSON(this.users)) {
+    /*if(!this.helpers.validateJSON(this.users)) {
       alert('Please fill all the fields!');
-    } else {
-      this.users['likes'] = [];
+    } else {*/
+      this.users['favorites'] = [];
       this.users['generatedMemes'] = [];
       console.log(this.users)
       this.userSto.users.push(this.users); // save w the provider
@@ -47,7 +48,7 @@ export class RegisterPage {
         success.onDidDismiss(() => this.closeit())
       });
       console.log(this.userSto.users);      
-    }
+    //}
 
   }
 
