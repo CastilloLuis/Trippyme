@@ -11,8 +11,10 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { LikesPage } from '../pages/likes/likes';
-import { SeelaterPage } from '../pages/seelater/seelater';
 import { GenerateMemePage } from '../pages/generate-meme/generate-meme';
+import { FavoritesPage } from '../pages/favorites/favorites';
+import { MymemesPage } from '../pages/mymemes/mymemes';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { ProvidersUsersStorageUsersProvider } from '../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -25,8 +27,10 @@ import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http
     RegisterPage,
     DashboardPage,
     LikesPage,
-    SeelaterPage,
-    GenerateMemePage
+    GenerateMemePage,
+    FavoritesPage,
+    MymemesPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -45,8 +49,10 @@ import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http
     RegisterPage,
     DashboardPage,
     LikesPage,
-    SeelaterPage,
-    GenerateMemePage
+    GenerateMemePage,
+    FavoritesPage,
+    MymemesPage,
+    TabsPage
   ],
   providers: [
     StatusBar,

@@ -52,17 +52,18 @@ export class DashboardPage {
   }
 
   addToFavorites(memeData: any) {
-    if(this.alreadyFavorited(memeData.id)) {
+    this.alreadyFavorited(memeData.id);
+    /*if(this.alreadyFavorited(memeData.id)) {
       // the users has alerady favorited this meme
       alert('Ya haz agregado a favorites este meme');
-    } else {
+    } else {*/
       // favorite the selected meme
       this.userSto.users.map((u) => {
         if(u.username === this.logged_user) {
           u.favorites.push(memeData);
         }
       });
-    }
+    //}
   }
 
   getFavorites() {
@@ -74,14 +75,14 @@ export class DashboardPage {
   }
 
   alreadyFavorited(memeID: any) {
-    let favorited;
+    let fav;
     this.userSto.users.map((u) => {
       if(u.username === this.logged_user) {
         // este es el user q frao
-        favorited = u.favorites.map((fav) => ((fav.id === memeID) ? true : false));
+        u.favorites.map((fav) => ((fav.id === memeID) ? fav = true : fav = false));
       }
     })
-    return favorited;
+    return fav;
   }
 
   infiniteScroll(event) {

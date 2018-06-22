@@ -57,7 +57,7 @@ export class GenerateMemePage {
         this.responseMeme = res.data.url;
         this.userSto.users.map((u) => {
           if(u.username === this.logged_user) {
-            u.favorites.push(this.responseMeme);
+            u.generatedmemes.push(this.responseMeme);
           }
         });
         console.log(JSON.stringify(res))

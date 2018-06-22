@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController 
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { DashboardPage } from '../dashboard/dashboard';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -37,13 +38,11 @@ export class LoginPage {
         userData = u;
       }
     });
-    // alert(userData)
     if(this.user_exists) {
       this.nativeSto.setItem('loggeduser', userData)
         .then(() => {
-          // console.log('la q frao la q frinchixdxd')
           loading.dismiss();
-          this.navCtrl.setRoot(DashboardPage);
+          this.navCtrl.setRoot(TabsPage);
         })
         .catch((err) => {
           alert('error al guardar' + err.message);

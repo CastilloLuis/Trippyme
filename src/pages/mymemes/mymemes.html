@@ -1,5 +1,5 @@
 <!--
-  Generated template for the SeelaterPage page.
+  Generated template for the MymemesPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>seelater</ion-title>
+    <ion-title>MY MEMES</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-slides>
+    <ion-slide *ngFor="let m of mymemes">
+      <img [src]="m">
+    </ion-slide>
+  </ion-slides>
 </ion-content>
