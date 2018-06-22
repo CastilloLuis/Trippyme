@@ -39,6 +39,7 @@ export class MymemesPage {
       (err) => alert(err)
     );      
   }
+
   getMyMemes() {
     this.userSto.users.map((u) => {
       if(u.username === this.logged_user) {
@@ -46,4 +47,5 @@ export class MymemesPage {
       }
     });
   }
+  
 }

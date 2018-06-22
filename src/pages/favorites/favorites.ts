@@ -41,7 +41,16 @@ export class FavoritesPage {
   }
 
   unFavorite(memeData: any) {
-    console.log(memeData);
+    alert(memeData);
+    this.userSto.users.map((u) => {
+      if(this.logged_user === u.username) {
+        u.favorites.map((f) => {
+          if(f.id === memeData.id) {
+            u.favorites.splice((u.favorites.indexOf(f)), 1);
+          }
+        })
+      }
+    })
   }
 
 }
