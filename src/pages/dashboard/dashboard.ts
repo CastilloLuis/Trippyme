@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
 import { GenerateMemePage } from '../generate-meme/generate-meme';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -14,11 +15,16 @@ export class DashboardPage {
   memes_arr = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProviders: HttpProvidersHttpProvider,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController, private nativeSto: NativeStorage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+    this.nativeSto.getItem('loggeduser')
+    .then(
+      (data) => alert(data),
+      (err) => alert(err)
+    )
   }
 
 

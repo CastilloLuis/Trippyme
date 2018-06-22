@@ -7,7 +7,7 @@
 
   <ion-slides>
 
-    <ion-slide>
+    <ion-slide style="overflow: scroll">
       <div style="margin-top: 10%;">
         <ion-title text-center>GENERATE YOUR MEME</ion-title>
         <ion-card style="height: auto;">
@@ -28,7 +28,9 @@
             <ion-input type="text" [(ngModel)]="text1"></ion-input>
           </ion-item>
           <ion-item>
-            <button ion-button full (click)="generateMeme(selectedMeme?.id)">GENERATE IT!</button>
+            <button ion-button full (click)="generateMeme(selectedMeme?.id)" id="generate-btn">
+              <span>GENERATE IT!</span>
+            </button>
           </ion-item>
         </ion-list>
       </div>
@@ -39,13 +41,21 @@
       <div [ngStyle]="setSlide()">
         <img [src]="generated ? responseMeme : false">
         <ion-fab right edge>
-            <button ion-fab color="light"><ion-icon name="share"></ion-icon></button>
-            <ion-fab-list side="left">
-              <button ion-fab><ion-icon name="logo-facebook" style="color: rgb(34, 34, 255);"></ion-icon></button>
-              <button ion-fab><ion-icon name="logo-twitter"  style="color: rgb(60, 182, 253);"></ion-icon></button>
-              <button ion-fab><ion-icon name="logo-whatsapp" style="color: rgb(43, 204, 43);"></ion-icon></button>
-            </ion-fab-list>
-          </ion-fab>        
+          <button ion-fab color="light">
+            <ion-icon name="share"></ion-icon>
+          </button>
+          <ion-fab-list side="left">
+            <button ion-fab>
+              <ion-icon name="logo-facebook" style="color: rgb(34, 34, 255);"></ion-icon>
+            </button>
+            <button ion-fab>
+              <ion-icon name="logo-twitter" style="color: rgb(60, 182, 253);"></ion-icon>
+            </button>
+            <button ion-fab>
+              <ion-icon name="logo-whatsapp" style="color: rgb(43, 204, 43);"></ion-icon>
+            </button>
+          </ion-fab-list>
+        </ion-fab>
       </div>
     </ion-slide>
 

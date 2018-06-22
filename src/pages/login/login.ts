@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { DashboardPage } from '../dashboard/dashboard';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,7 +12,7 @@ import { DashboardPage } from '../dashboard/dashboard';
 export class LoginPage {
 
   user_login = {};
-  user_exists: boolean = false;
+  user_exists = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               private userSto: ProvidersUsersStorageUsersProvider, private nativeSto: NativeStorage) {
@@ -32,26 +26,23 @@ export class LoginPage {
     console.log(this.user_login);
     console.log(this.userSto.users);
     let userData;
-    this.navCtrl.setRoot(DashboardPage);
     (this.userSto.users).map((u) => {
       if((u.username === this.user_login['username'])&&(u.password === this.user_login['password'])) {
         this.user_exists = true;
         userData = u;
       }
     });
+    alert(userData)
     if(this.user_exists) {
-      /*this.nativeSto.setItem('loggeduser', userData)
+      this.nativeSto.setItem('loggeduser', userData)
         .then(() => {
-          alert('perfect bitch')
+          alert('la q frao la q frinchixdxd')
           this.navCtrl.setRoot(DashboardPage);
         })
         .catch((err) => {
           alert('error al guardar' + err.message);
-        })*/
-    } else {
-      alert('no estas registrado bro');
+        })
     }
-    this.user_exists = false;
   }
 
   closeit() {
