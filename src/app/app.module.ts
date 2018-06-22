@@ -10,7 +10,6 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { DashboardPage } from '../pages/dashboard/dashboard';
-import { LikesPage } from '../pages/likes/likes';
 import { GenerateMemePage } from '../pages/generate-meme/generate-meme';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { MymemesPage } from '../pages/mymemes/mymemes';
@@ -26,7 +25,6 @@ import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http
     LoginPage,
     RegisterPage,
     DashboardPage,
-    LikesPage,
     GenerateMemePage,
     FavoritesPage,
     MymemesPage,
@@ -48,7 +46,6 @@ import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http
     LoginPage,
     RegisterPage,
     DashboardPage,
-    LikesPage,
     GenerateMemePage,
     FavoritesPage,
     MymemesPage,

@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+  <button type="button" ion-button (click)="getMyMemes()">GET MY MEMES</button>
   <ion-slides>
     <ion-slide *ngFor="let m of mymemes">
       <img [src]="m">

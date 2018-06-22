@@ -32,12 +32,18 @@ export class MymemesPage {
         this.logged_user = data.username;
         this.userSto.users.map((u) => {
           if(u.username === this.logged_user) {
-            this.mymemes = u.generatedmemes;
+            this.mymemes = u.generatedMemes;
           }
         });          
       },
       (err) => alert(err)
     );      
   }
-
+  getMyMemes() {
+    this.userSto.users.map((u) => {
+      if(u.username === this.logged_user) {
+        alert(JSON.stringify(u));
+      }
+    });
+  }
 }
