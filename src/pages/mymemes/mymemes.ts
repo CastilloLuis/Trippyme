@@ -19,16 +19,22 @@ export class MymemesPage {
 
   logged_user = null;
   mymemes = [];
+  hasgenerated = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userSto: ProvidersUsersStorageUsersProvider,
               private nativeSto: NativeStorage) {
   }
 
   ionViewDidLoad() {
+    if(this.mymemes.length === 0) {
+      this.hasgenerated = false;
+    } else {
+      this.hasgenerated = true;
+    }
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
-        alert(data.username)
+        // alert(data.username)
         this.logged_user = data.username;
         this.userSto.users.map((u) => {
           if(u.username === this.logged_user) {
@@ -46,6 +52,14 @@ export class MymemesPage {
         alert(JSON.stringify(u));
       }
     });
+  }
+
+  setStyle() {
+    let styles = {
+      'visibility': this.hasgenerated ? 'visible' : 'hidden',
+      'margin-top': '2%'
+    }
+    return styles;
   }
   
 }

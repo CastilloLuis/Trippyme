@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 //import { NativeStorage } from '@ionic-native/native-storage';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { helpers } from '../../global';
@@ -18,7 +18,8 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
               private loadingCtrl: LoadingController, private userSto: ProvidersUsersStorageUsersProvider,
-              private toastCtrl: ToastController, private helpers: helpers, private nativeSto: NativeStorage) {
+              private toastCtrl: ToastController, private helpers: helpers, private nativeSto: NativeStorage,
+              private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -36,9 +37,15 @@ export class RegisterPage {
       duration: 3000,
       cssClass: 'addedToast'
     });
-    /*if(!this.helpers.validateJSON(this.users)) {
-      alert('Please fill all the fields!');
-    } else {*/
+    // console.log(this.helpers.validateJSON(this.users, 4))
+    if(!this.helpers.validateJSON(this.users, 4)) {
+      const alert = this.alertCtrl.create({
+        title: 'Error :(',
+        subTitle: 'You have to fill all the fields...',
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
       this.users['favorites'] = [];
       this.users['generatedMemes'] = [];
       console.log(this.users)
@@ -49,7 +56,7 @@ export class RegisterPage {
         success.onDidDismiss(() => this.closeit())
       });
       console.log(this.userSto.users);      
-    //}
+    }
 
   }
 

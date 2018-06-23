@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -20,10 +20,11 @@ export class GenerateMemePage {
   responseMeme: string;
   generated = false;
   logged_user = null;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
               private httpProvider: HttpProvidersHttpProvider, private loaderCtrl: LoadingController, 
               private userSto: ProvidersUsersStorageUsersProvider, private nativeSto: NativeStorage,
-              private socialMediaSharing: SocialSharing, private galleryCtrl: PhotoLibrary) {
+              private socialMediaSharing: SocialSharing, private galleryCtrl: PhotoLibrary, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -47,18 +48,27 @@ export class GenerateMemePage {
     console.log(this.text0)
     console.log(this.text1)
     console.log(memeID)
-    this.httpProvider.fetch(null, 'GET', `https://api.imgflip.com/caption_image?username=lcastillo&password=26709417&template_id=${memeID}&text0=${this.text0}&text1=${this.text1}`)
-      .subscribe((res) => {
-        loader.dismiss();     
-        this.generated = true;   
-        this.responseMeme = res.data.url;
-        this.userSto.users.map((u) => {
-          if(u.username === this.logged_user) {
-            u.generatedMemes.push(this.responseMeme);
-          }
-        });
-        console.log(JSON.stringify(res))
+    if((this.text0 === '')||(this.text1 === '')) {
+      const alert = this.alertCtrl.create({
+        title: 'Error :(',
+        subTitle: 'You have to fill all the fields...',
+        buttons: ['OK']
       })
+      alert.present();
+    } else {
+      this.httpProvider.fetch(null, 'GET', `https://api.imgflip.com/caption_image?username=lcastillo&password=26709417&template_id=${memeID}&text0=${this.text0}&text1=${this.text1}`)
+        .subscribe((res) => {
+          loader.dismiss();     
+          this.generated = true;   
+          this.responseMeme = res.data.url;
+          this.userSto.users.map((u) => {
+            if(u.username === this.logged_user) {
+              u.generatedMemes.push(this.responseMeme);
+            }
+          });
+          console.log(JSON.stringify(res))
+        });
+    }
   }
 
   setSlide() {

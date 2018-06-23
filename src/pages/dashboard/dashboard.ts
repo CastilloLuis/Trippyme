@@ -22,7 +22,6 @@ export class DashboardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
@@ -53,7 +52,7 @@ export class DashboardPage {
   }
 
   addToFavorites(memeData: any) {
-    alert(this.alreadyFavorited(memeData.id));
+    // alert(this.alreadyFavorited(memeData.id));
     if(this.alreadyFavorited(memeData.id)) {
       // the users has alerady favorited this meme
       alert('Ya haz agregado a favorites este meme');

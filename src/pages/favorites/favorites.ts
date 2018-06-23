@@ -19,6 +19,7 @@ export class FavoritesPage {
 
   logged_user  = null;
   myfavorites = [];
+  hasfavorite = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userSto: ProvidersUsersStorageUsersProvider,
               private nativeSto: NativeStorage) {
@@ -38,6 +39,9 @@ export class FavoritesPage {
       },
       (err) => alert('No haz iniciado sesión')
     );      
+    if(this.myfavorites.length > 0 ) {
+      this.hasfavorite = true;
+    }
   }
 
   unFavorite(memeData: any) {
@@ -50,6 +54,14 @@ export class FavoritesPage {
         })
       }
     })
+  }
+
+  setStyle() {
+    let styles = {
+      'visibility': this.hasfavorite ? 'visible' : 'hidden',
+      'margin-top': '2%'
+    }
+    return styles;
   }
 
 }

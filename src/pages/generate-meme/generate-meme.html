@@ -30,11 +30,11 @@
         </ion-list>
         <button ion-button full (click)="generateMeme(selectedMeme?.id)" id="generate-btn">
           <span>GENERATE IT!</span>
-        </button>     
+        </button>
       </div>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide style="overflow: scroll">
       <h1 *ngIf="!generated">NO HAZ GENERADO NADA AUN WEY</h1>
       <div [ngStyle]="setSlide()">
         <img [src]="generated ? responseMeme : false">
@@ -53,8 +53,8 @@
               <ion-icon name="logo-whatsapp" style="color: rgb(43, 204, 43);"></ion-icon>
             </button>
             <button ion-fab (click)="socialSharing('gallery')">
-                <ion-icon name="images" style="color: rgb(245, 174, 42);"></ion-icon>
-              </button>            
+              <ion-icon name="images" style="color: rgb(245, 174, 42);"></ion-icon>
+            </button>
           </ion-fab-list>
         </ion-fab>
       </div>

@@ -14,7 +14,7 @@
             <ion-icon name="person"></ion-icon>
             Full Name
         </ion-label>
-        <ion-input type="text" [(ngModel)]="users.fullname" name="fullname"></ion-input>
+        <ion-input type="text" [(ngModel)]="users.fullname" name="fullname" required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -22,7 +22,7 @@
           <ion-icon name="mail"></ion-icon>
           E-mail
         </ion-label>
-        <ion-input type="text" [(ngModel)]="users.email" name="email"></ion-input>
+        <ion-input type="text" [(ngModel)]="users.email" name="email" required></ion-input>
       </ion-item>
  
       <ion-item>
@@ -30,7 +30,7 @@
           <ion-icon name="contact"></ion-icon>          
           Username
         </ion-label>
-        <ion-input type="text" [(ngModel)]="users.username" name="username"></ion-input>
+        <ion-input type="text" [(ngModel)]="users.username" name="username" required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -38,7 +38,7 @@
           <ion-icon name="lock"></ion-icon>
           Password
         </ion-label>
-        <ion-input type="password" [(ngModel)]="users.password" name="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="users.password" name="password" required></ion-input>
       </ion-item>
 
       <button ion-button round color="danger" full type="submit" style="margin-top: 15%;">REGISTER</button>
