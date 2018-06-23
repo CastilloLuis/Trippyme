@@ -26,7 +26,7 @@ export class DashboardPage {
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
-        alert(data.username)
+        // alert(data.username)
         this.logged_user = data.username;
         this.getMemes();
       },

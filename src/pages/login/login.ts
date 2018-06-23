@@ -48,7 +48,7 @@ export class LoginPage {
           alert('error al guardar' + err.message);
         })
     } else {
-      alert('No estas registrado broo');
+      alert('You are not registered');
     }
   }
 

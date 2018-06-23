@@ -16,8 +16,10 @@ import { MymemesPage } from '../pages/mymemes/mymemes';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { ProvidersUsersStorageUsersProvider } from '../providers/providers-users-storage-users/providers-users-storage-users';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { HttpProvidersHttpProvider } from '../providers/http-providers-http/http-providers-http';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @NgModule({
   declarations: [
     MyApp,
