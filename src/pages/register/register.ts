@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController,
 //import { NativeStorage } from '@ionic-native/native-storage';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { helpers } from '../../global';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,7 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
               private loadingCtrl: LoadingController, private userSto: ProvidersUsersStorageUsersProvider,
-              private toastCtrl: ToastController, private helpers: helpers) {
+              private toastCtrl: ToastController, private helpers: helpers, private nativeSto: NativeStorage) {
   }
 
   ionViewDidLoad() {

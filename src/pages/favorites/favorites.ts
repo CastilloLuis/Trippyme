@@ -28,7 +28,7 @@ export class FavoritesPage {
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
-        alert(data.username)
+        // alert(data.username)
         this.logged_user = data.username;
         this.userSto.users.map((u) => {
           if(u.username === this.logged_user) {
@@ -36,12 +36,11 @@ export class FavoritesPage {
           }
         });         
       },
-      (err) => alert(err)
+      (err) => alert('No haz iniciado sesión')
     );      
   }
 
   unFavorite(memeData: any) {
-    alert(memeData);
     this.userSto.users.map((u) => {
       if(this.logged_user === u.username) {
         u.favorites.map((f) => {

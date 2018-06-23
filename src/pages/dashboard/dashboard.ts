@@ -4,6 +4,7 @@ import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/h
 import { GenerateMemePage } from '../generate-meme/generate-meme';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -75,20 +76,26 @@ export class DashboardPage {
   }
 
   alreadyFavorited(memeID: any) {
-    //alert(memeID);
     let favorite = false;
     this.userSto.users.map((u) => {
       if(u.username === this.logged_user) {
-        //alert('user: ' + u.username);
         u.favorites.map((f) => {
           if(memeID === f.id) {
-            //alert('memeid pasado: ' + memeID + ' meme id comparando: ' + f.id);
             favorite = true;
           }
         })
       }
     })
     return favorite;
+  }
+
+  logOut() {
+    this.nativeSto.clear()
+      .then(() => {
+        alert('Logged out');
+        this.navCtrl.setRoot(HomePage);
+      })
+      .catch(() => alert('Error while logout action...'))
   }
 
   infiniteScroll(event) {
