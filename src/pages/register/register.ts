@@ -15,6 +15,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 export class RegisterPage {
   
   users = {};
+  emailRegex = /([A-Za-z0-9]+)(@)([A-Za-z0-9]+)\.(com|net|org)$/;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
               private loadingCtrl: LoadingController, private userSto: ProvidersUsersStorageUsersProvider,
@@ -33,31 +34,47 @@ export class RegisterPage {
       duration: 2000
     });
     const success = this.toastCtrl.create({
-      message: 'Succesfull register!!',
-      duration: 3000,
+      message: 'SUCCESSFUL REGISTER !!',
+      duration: 1500,
       cssClass: 'addedToast'
     });
-    // console.log(this.helpers.validateJSON(this.users, 4))
     if(!this.helpers.validateJSON(this.users, 4)) {
-      const alert = this.alertCtrl.create({
-        title: 'Error :(',
-        subTitle: 'You have to fill all the fields...',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.createAlert('Error :(', 'You have to fill all the fields...');
     } else {
-      this.users['favorites'] = [];
-      this.users['generatedMemes'] = [];
-      console.log(this.users)
-      this.userSto.users.push(this.users); // save w the provider
-      loader.present();
-      loader.onDidDismiss(() => {
-        success.present();
-        success.onDidDismiss(() => this.closeit())
-      });
-      console.log(this.userSto.users);      
+      if((this.emailRegex.test(this.users['email']))){
+        if((this.verifyUser(this.users['username'], this.users['email'])).status) {
+          this.createAlert('Error :(', 'Username or email already exists...');
+        } else {
+          this.users['favorites'] = [];
+          this.users['generatedMemes'] = [];
+          console.log(this.users)
+          this.userSto.users.push(this.users); // save w the provider
+          loader.present();
+          loader.onDidDismiss(() => {
+            success.present();
+            success.onDidDismiss(() => this.closeit())
+          });
+          console.log(this.userSto.users);          
+        }        
+      } else {
+        this.createAlert('Error :(', 'Please, enter a valid email...');
+      }
     }
+  }
 
+  verifyUser(username: string, email: string) {
+    let exists = false;
+    this.userSto.users.map((u) => (((u.username === username) || (u.email === email)) ? exists = true : exists));
+    return {status: exists, msg: 'Username or email already exists...'};
+  }
+
+  createAlert(title: string, subtitle: string) {
+    const alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   closeit() {

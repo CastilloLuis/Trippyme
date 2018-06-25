@@ -3,6 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -12,6 +13,9 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
+  }
+
+  ionViewDidLoad() {
   }
 
   goTo(page) {

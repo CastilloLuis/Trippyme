@@ -92,7 +92,8 @@ export class DashboardPage {
     this.nativeSto.clear()
       .then(() => {
         alert('Logged out');
-        this.navCtrl.setRoot(HomePage);
+        // this.navCtrl.setRoot(HomePage);
+        this.navCtrl.parent.parent.setRoot(HomePage)
       })
       .catch(() => alert('Error while logout action...'))
   }
