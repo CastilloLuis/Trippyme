@@ -35,7 +35,6 @@ export class GenerateMemePage {
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
-        alert(data.username)
         this.logged_user = data.username;
       },
       (err) => alert(err)
@@ -47,8 +46,8 @@ export class GenerateMemePage {
     loader.present();
     console.log(this.text0)
     console.log(this.text1)
-    console.log(memeID)
-    if((this.text0 === '')||(this.text1 === '')) {
+    if((this.text0 === undefined)||(this.text0 === '')||(this.text1 === undefined)||(this.text1 === '')) {
+      loader.dismiss();
       const alert = this.alertCtrl.create({
         title: 'Error :(',
         subTitle: 'You have to fill all the fields...',

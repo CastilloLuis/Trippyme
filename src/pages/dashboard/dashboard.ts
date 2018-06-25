@@ -22,10 +22,10 @@ export class DashboardPage {
   }
 
   ionViewDidLoad() {
+    // this.getMemes();
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
-        // alert(data.username)
         this.logged_user = data.username;
         this.getMemes();
       },
@@ -55,7 +55,7 @@ export class DashboardPage {
     // alert(this.alreadyFavorited(memeData.id));
     if(this.alreadyFavorited(memeData.id)) {
       // the users has alerady favorited this meme
-      alert('Ya haz agregado a favorites este meme');
+      alert('You already favorited this meme');
     } else {
       // favorite the selected meme
       this.userSto.users.map((u) => {
@@ -64,14 +64,6 @@ export class DashboardPage {
         }
       });
     }
-  }
-
-  getFavorites() {
-    this.userSto.users.map((u) => {
-      if(u.username === this.logged_user) {
-        alert(JSON.stringify(u));
-      }
-    });
   }
 
   alreadyFavorited(memeID: any) {

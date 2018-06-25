@@ -56,12 +56,12 @@ export class FavoritesPage {
     })
   }
 
-  setStyle() {
+  /*setStyle() {
     let styles = {
       'visibility': this.hasfavorite ? 'visible' : 'hidden',
       'margin-top': '2%'
     }
     return styles;
-  }
+  }*/
 
 }

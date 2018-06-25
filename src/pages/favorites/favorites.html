@@ -1,14 +1,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>MY FAVORITES</ion-title>
+    <ion-title><ion-icon name="star"></ion-icon> FAVORITES</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <h3 text-center [ngStyle]="setStyle()">You have not favorite anything :(</h3>
+<ion-content padding id="content">
+ <!--<h3 text-center *ngIf="!hasfavorite">You have not favorite anything :(</h3>-->
   <ion-card *ngFor="let f of myfavorites">
     <div>
       <img src="{{f.url}}"/>

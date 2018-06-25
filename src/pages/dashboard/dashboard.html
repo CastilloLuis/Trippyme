@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title text-center>TRIPPY-ME</ion-title>
+    <ion-title left><ion-icon name="cube"></ion-icon><span style="font-style: italic"> trippy-me</span></ion-title>
     <ion-buttons right>
       <button ion-button clear (click)="logOut()">
         <ion-icon name="close" style="font-size: 25px;"></ion-icon>
@@ -12,14 +12,14 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="content">
   <!--<button type="button" ion-button (click)="getMemes()">GET MEMES</button>
   <button type="button" ion-button (click)="getFavorites()">GET FAVORITES</button>-->
   <ion-card *ngFor="let m of memes">
     <div (click)="generateMeme(m)">
       <img src="{{m.url}}" />
       <div class="card-title">{{m.name}}</div>
-      <div class="card-subtitle">{{m.id}}</div>
+      <!--<div class="card-subtitle">{{m.id}}</div>-->
     </div>
     <button ion-button outline color="yellow" style="color: black;" (click)="addToFavorites(m)">
       FAVORITE

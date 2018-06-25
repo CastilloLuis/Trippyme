@@ -30,6 +30,7 @@ export class LoginPage {
   loginForm() {
     console.log(this.user_login);
     console.log(this.userSto.users);
+    // this.navCtrl.setRoot(TabsPage);
     let userData;
     let loading = this.loading.create({
       content: 'Loading...',

@@ -26,11 +26,6 @@ export class MymemesPage {
   }
 
   ionViewDidLoad() {
-    if(this.mymemes.length === 0) {
-      this.hasgenerated = false;
-    } else {
-      this.hasgenerated = true;
-    }
     this.nativeSto.getItem('loggeduser')
     .then(
       (data) => { 
@@ -44,6 +39,9 @@ export class MymemesPage {
       },
       (err) => alert(err)
     );      
+    if(!(this.mymemes.length === 0)) {
+      this.hasgenerated = true;
+    }    
   }
 
   getMyMemes() {
@@ -54,12 +52,12 @@ export class MymemesPage {
     });
   }
 
-  setStyle() {
+  /*setStyle() {
     let styles = {
       'visibility': this.hasgenerated ? 'visible' : 'hidden',
       'margin-top': '2%'
     }
     return styles;
-  }
+  }*/
   
 }
