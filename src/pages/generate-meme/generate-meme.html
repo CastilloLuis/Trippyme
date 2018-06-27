@@ -21,11 +21,11 @@
         <ion-list>
           <ion-item>
             <ion-label floating>Text #1</ion-label>
-            <ion-input type="text" [(ngModel)]="text0"></ion-input>
+            <ion-input type="text" [(ngModel)]="text0" class="item-input"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label floating>Text #2</ion-label>
-            <ion-input type="text" [(ngModel)]="text1"></ion-input>
+            <ion-input type="text" [(ngModel)]="text1" class="item-input"></ion-input>
           </ion-item>
         </ion-list>
         <button ion-button full (click)="generateMeme(selectedMeme?.id)" id="generate-btn">
@@ -35,7 +35,7 @@
     </ion-slide>
 
     <ion-slide style="overflow: scroll">
-      <h1 *ngIf="!generated">NO HAZ GENERADO NADA AUN WEY</h1>
+      <h1 *ngIf="!generated">YOU HAVE NOT GENERATE ANYTHING</h1>
       <div [ngStyle]="setSlide()">
         <img [src]="generated ? responseMeme : false">
         <ion-fab right edge>

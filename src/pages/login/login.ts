@@ -36,7 +36,9 @@ export class LoginPage {
       content: 'Loading...',
       duration: 2000
     });
+    loading.present();
     if(!this.helpers.validateJSON(this.user_login, 2)){
+      loading.dismiss();
       const alert = this.alertCtrl.create({
         title: 'Error :(',
         subTitle: 'You have to fill all the fields...',
@@ -54,12 +56,13 @@ export class LoginPage {
         this.nativeSto.setItem('loggeduser', userData)
           .then(() => {
             loading.dismiss();
-            this.navCtrl.setRoot(TabsPage);
+            loading.onDidDismiss(() => this.navCtrl.setRoot(TabsPage));
           })
           .catch((err) => {
             alert('error al guardar' + err.message);
           })
       } else {
+        loading.dismiss();
         const alert = this.alertCtrl.create({
           title: 'Wait a minute...',
           subTitle: 'You are not registered!',

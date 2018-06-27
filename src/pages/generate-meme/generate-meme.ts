@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController, Slides } from 'ionic-angular';
 import { HttpProvidersHttpProvider } from '../../providers/http-providers-http/http-providers-http';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -20,7 +20,8 @@ export class GenerateMemePage {
   responseMeme: string;
   generated = false;
   logged_user = null;
-  
+  @ViewChild(Slides) slides: Slides;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
               private httpProvider: HttpProvidersHttpProvider, private loaderCtrl: LoadingController, 
               private userSto: ProvidersUsersStorageUsersProvider, private nativeSto: NativeStorage,
@@ -66,6 +67,7 @@ export class GenerateMemePage {
             }
           });
           console.log(JSON.stringify(res))
+          this.slides.slideTo(2, 500);
         });
     }
   }

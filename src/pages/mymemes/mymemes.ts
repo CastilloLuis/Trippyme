@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ProvidersUsersStorageUsersProvider } from '../../providers/providers-users-storage-users/providers-users-storage-users';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { PhotoLibrary } from '@ionic-native/photo-library';
 
-/**
- * Generated class for the MymemesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
   selector: 'page-mymemes',
   templateUrl: 'mymemes.html',
+  providers: [SocialSharing, PhotoLibrary]  
 })
 export class MymemesPage {
 
@@ -22,7 +19,7 @@ export class MymemesPage {
   hasgenerated = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userSto: ProvidersUsersStorageUsersProvider,
-              private nativeSto: NativeStorage) {
+              private nativeSto: NativeStorage, private alertCtrl: AlertController, private socialMediaSharing: SocialSharing, private galleryCtrl: PhotoLibrary,) {
   }
 
   ionViewDidLoad() {
@@ -50,6 +47,29 @@ export class MymemesPage {
         alert(JSON.stringify(u));
       }
     });
+  }
+  
+  pressEvent(e, img) {
+    (this.alertCtrl.create({
+      title: 'SAVE YOUR MEME',
+      buttons: [
+        'CANCEL',
+        {
+          text: 'SAVE',
+          handler: () => this.saveImg(img)
+        }        
+      ]
+    })).present();
+  }
+
+  saveImg(img) {
+    this.galleryCtrl.requestAuthorization()
+    .then(() => {
+      this.galleryCtrl.saveImage(img, 'TrippyMe', null)
+        .then(() => alert('Saved successfully'))
+        .catch((err) => alert('Error while saving...' + err));        
+    })
+    .catch((err) => alert('Error while saving the picture :(' + err))
   }
 
   /*setStyle() {
